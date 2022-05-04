@@ -1,0 +1,55 @@
+name: PR Check
+
+on: [pull_request, workflow_dispatch]
+
+jobs:
+  analyze:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Configuring flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '2.10.2'
+          channel: 'stable'
+      - name: "Bootstrap Workspace"
+        run: |
+          flutter packages get
+          flutter packages get sample/
+      - name: "Flutter Analyze"
+        run: flutter analyze .
+
+  format:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Configuring flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - name: "Bootstrap Workspace"
+        run: flutter packages get
+      - name: "Flutter Format"
+        run: flutter format . --set-exit-if-changed
+
+  test:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Configuring flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - name: "Bootstrap Workspace"
+        run: flutter packages get
+      - name: "Flutter Format"
+        run: flutter test
