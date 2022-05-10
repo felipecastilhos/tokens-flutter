@@ -1,5 +1,7 @@
-## 0.0.1
+## 0.0.2
+* Create package release using changelog file
 
-* TODO: Describe initial release.
+## 0.0.1
+* Add flutter tokens.
 
 
