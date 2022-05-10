@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set release name
-        run: echo "release_name=v$(cat pubspec.yaml | grep version | awk '{print $2 }')" >> $GITHUB_ENV
+        run: echo "release_name=v$(head -1 CHANGELOG.md | awk '{print $2 }')" >> $GITHUB_ENV
 
       - name: Create Release
         id: create_release
