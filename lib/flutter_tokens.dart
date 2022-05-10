@@ -6,5 +6,3 @@ export '/colors/ftokens_colors.dart';
 
 //Sizes tokens
 export '/sizes/ftokens_sizes.dart';
-
-
